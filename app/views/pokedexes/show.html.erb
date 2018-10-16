@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pokedex.name %>
+</p>
+
+<p>
+  <strong>Base healt point:</strong>
+  <%= @pokedex.base_healt_point %>
+</p>
+
+<p>
+  <strong>Base attack:</strong>
+  <%= @pokedex.base_attack %>
+</p>
+
+<p>
+  <strong>Base defence:</strong>
+  <%= @pokedex.base_defence %>
+</p>
+
+<p>
+  <strong>Base speed:</strong>
+  <%= @pokedex.base_speed %>
+</p>
+
+<p>
+  <strong>Element type:</strong>
+  <%= @pokedex.element_type %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @pokedex.image_url %>
+</p>
+
+<%= link_to 'Edit', edit_pokedex_path(@pokedex) %> |
+<%= link_to 'Back', pokedexes_path %>
