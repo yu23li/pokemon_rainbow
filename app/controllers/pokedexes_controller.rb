@@ -6,7 +6,6 @@ class PokedexesController < ApplicationController
   # GET /pokedexes.json
   def index
     @pokedexes = Pokedex.all.paginate(:page => params[:page], :per_page => 5)
-
   end
 
   # GET /pokedexes/1
@@ -75,6 +74,6 @@ class PokedexesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pokedex_params
-      params.require(:pokedex).permit(:name, :base_healt_point, :base_attack, :base_defence, :base_speed, :element_type, :image_url)
+      params.require(:pokedex).permit(:name, :base_health_point, :base_attack, :base_defence, :base_speed, :element_type, :image_url)
     end
 end

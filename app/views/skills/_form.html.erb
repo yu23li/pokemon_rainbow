@@ -1,0 +1,37 @@
+<%= form_with(model: skill, local: true) do |form| %>
+  <% if skill.errors.any? %>
+    <div id="error_explanation"  class="alert alert-danger">
+      <h2><%= pluralize(skill.errors.count, "error") %> prohibited this skill from being saved:</h2>
+
+      <ul>
+      <% skill.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group col-md-9">
+    <%= form.label :name %>
+    <%= form.text_field :name, :class=>"form-control"  %>
+  </div>
+
+  <div class="form-group col-md-9">
+    <%= form.label :power %>
+    <%= form.number_field :power, :class=>"form-control"  %>
+  </div>
+
+  <div class="form-group col-md-9">
+    <%= form.label :max_pp %>
+    <%= form.number_field :max_pp, :class=>"form-control"  %>
+  </div>
+
+  <div class="form-group col-md-9">
+    <%= form.label :element_type %>
+    <%= select_tag "skill[element_type]", options_for_select(@element_type_select, :selected => @skill.element_type), :class=>"form-control"  %>
+  </div>
+
+  <div class="form-group col-md-9">
+    <%= form.submit :class=>"btn btn-primary" %>
+  </div>
+<% end %>

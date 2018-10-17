@@ -1,0 +1,46 @@
+ <!-- Page Header -->
+ <header class="masthead">
+   <div class="overlay"></div>
+   <div class="container">
+     <div class="row">
+       <div class="col-md-4">
+         <div class="site-heading">
+           <h1>Skill</h1>
+         </div>
+       </div>
+     </div>
+   </div>
+ </header>
+ <hr>
+
+<div class="container">
+ <% if notice.present? %>
+  <p id="notice" class="alert alert-success"><%= notice %></p>
+ <% end %>
+    <div class="col-md-8">
+      <%= link_to 'Destroy', @skill, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+      <%= link_to 'Edit', edit_skill_path(@skill), :class=>"btn btn-primary" %> |
+      <%= link_to 'Back', skills_path, :class=>"btn btn-secondary" %>
+      <br>
+      <br>
+      <p>
+        <strong>Name:</strong>
+        <%= @skill.name %>
+      </p>
+      <p>
+        <strong>Power:</strong>
+        <%= @skill.power %>
+      </p>
+      <p>
+        <strong>Max pp:</strong>
+        <%= @skill.max_pp %>
+      </p>
+      <p>
+        <strong>Element type:</strong>
+        <%= @skill.element_type %>
+      </p>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pokedex:</strong>
+  <%= @pokemon.pokedex_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pokemon.name %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @pokemon.level %>
+</p>
+
+<p>
+  <strong>Max health point:</strong>
+  <%= @pokemon.max_health_point %>
+</p>
+
+<p>
+  <strong>Current health point:</strong>
+  <%= @pokemon.current_health_point %>
+</p>
+
+<p>
+  <strong>Attack:</strong>
+  <%= @pokemon.attack %>
+</p>
+
+<p>
+  <strong>Defence:</strong>
+  <%= @pokemon.defence %>
+</p>
+
+<p>
+  <strong>Speed:</strong>
+  <%= @pokemon.speed %>
+</p>
+
+<p>
+  <strong>Current experience:</strong>
+  <%= @pokemon.current_experience %>
+</p>
+
+<%= link_to 'Edit', edit_pokemon_path(@pokemon) %> |
+<%= link_to 'Back', pokemons_path %>
