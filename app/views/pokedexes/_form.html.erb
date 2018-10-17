@@ -1,7 +1,7 @@
-<div class="container">
+
       <%= form_with(model: pokedex, local: true) do |form| %>
         <% if pokedex.errors.any? %>
-          <div id="error_explanation">
+          <div id="error_explanation" class="alert alert-danger">
             <h2><%= pluralize(pokedex.errors.count, "error") %> prohibited this pokedex from being saved:</h2>
 
             <ul>
@@ -12,50 +12,50 @@
           </div>
         <% end %>
 
-          <div class="form-group col-md-6"">
+          <div class="form-group col-md-9">
             <%= form.label :name %>
             <%= form.text_field :name, :class=>"form-control" %>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-9">
             <%= form.label :base_healt_point %>
             <%= form.number_field :base_healt_point, :class=>"form-control" %>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-9">
             <%= form.label :base_attack %>
             <%= form.number_field :base_attack, :class=>"form-control" %>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-9">
             <%= form.label :base_defence %>
             <%= form.number_field :base_defence, :class=>"form-control" %>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-9">
             <%= form.label :base_speed %>
             <%= form.number_field :base_speed, :class=>"form-control" %>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-9">
             <%= form.label :base_speed %>
             <%= form.number_field :base_speed, :class=>"form-control" %>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-9">
             <%= form.label :element_type %>
-            <%= form.number_field :element_type, :class=>"form-control" %>
+            <%= select_tag "pokedex[element_type]", options_for_select(@element_type_select, :selected => @pokedex.element_type), :class=>"form-control" %>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-9">
             <%= form.label :image_url %>
-            <%= form.number_field :image_url, :class=>"form-control" %>
+            <%= form.text_field :image_url, :class=>"form-control" %>
           </div>
 
-          <div class="fform-group col-md-6">
+          <div class="form-group col-md-9">
             <%= form.submit :class=>"btn btn-primary" %>
           </div>
         </br>
         <% end %>
-      </div>
-    </div>
+
+

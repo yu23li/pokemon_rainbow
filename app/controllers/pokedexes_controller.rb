@@ -1,10 +1,12 @@
 class PokedexesController < ApplicationController
   before_action :set_pokedex, only: [:show, :edit, :update, :destroy]
+  before_action :element_type_select, only: [:new, :create, :edit, :update]
 
   # GET /pokedexes
   # GET /pokedexes.json
   def index
-    @pokedexes = Pokedex.all
+    @pokedexes = Pokedex.all.paginate(:page => params[:page], :per_page => 5)
+
   end
 
   # GET /pokedexes/1
@@ -65,6 +67,10 @@ class PokedexesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_pokedex
       @pokedex = Pokedex.find(params[:id])
+    end
+
+    def element_type_select
+      @element_type_select = Pokedex::ELEMENT_TYPE.collect{ |u| [u, u] }
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
