@@ -1,15 +1,17 @@
 class PokemonsController < ApplicationController
   before_action :set_pokemon, only: [:show, :edit, :update, :destroy]
+  before_action :pokedex_select, only: [:new, :edit, :update, :create]
 
   # GET /pokemons
   # GET /pokemons.json
   def index
-    @pokemons = Pokemon.all
+    @pokemons = Pokemon.all.paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /pokemons/1
   # GET /pokemons/1.json
   def show
+    @pokedex = Pokedex.find(@pokemon.pokedex_id)
   end
 
   # GET /pokemons/new
@@ -20,12 +22,12 @@ class PokemonsController < ApplicationController
 
   # GET /pokemons/1/edit
   def edit
+    @pokedex ||= Pokedex.all
   end
 
   # POST /pokemons
   # POST /pokemons.json
   def create
-
     @pokemon = Pokemon.new(pokemon_params)
     pokedex = Pokedex.find(@pokemon.pokedex_id)
 
@@ -77,6 +79,10 @@ class PokemonsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_pokemon
       @pokemon = Pokemon.find(params[:id])
+    end
+
+    def pokedex_select
+      @pokedex_select = Pokedex.all.collect{ |u| [u.name, u.id] }
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

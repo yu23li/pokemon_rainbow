@@ -1,20 +1,19 @@
-   <header class="masthead">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4x">
-            <div class="site-heading">
-              <h1>Editing Pokedex</h1>
-            </div>
-          </div>
+   
+<header class="masthead">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4x">
+        <div class="site-heading">
+          <h1>Editing Pokedex</h1>
         </div>
       </div>
-    </header>
-    <hr>
-
-    <div class="container">
-      <%= render 'form', pokedex: @pokedex %>
-      <%= link_to 'Show', @pokedex, :class=>"btn btn-primary" %> |
-      <%= link_to 'Back', pokedexes_path, :class=>"btn btn-secondary"%>
     </div>
-
+  </div>
+</header>
+<hr>
+<div class="container">
+  <%= render 'form', pokedex: @pokedex %>
+  <%= link_to 'Show', @pokedex, :class=>"btn btn-primary" %> |
+  <%= link_to 'Back', pokedexes_path, :class=>"btn btn-secondary"%>
+</div>

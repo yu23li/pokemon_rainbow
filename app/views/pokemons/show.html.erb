@@ -1,49 +1,71 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Pokedex:</strong>
-  <%= @pokemon.pokedex_id %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @pokemon.name %>
-</p>
-
-<p>
-  <strong>Level:</strong>
-  <%= @pokemon.level %>
-</p>
-
-<p>
-  <strong>Max health point:</strong>
-  <%= @pokemon.max_health_point %>
-</p>
-
-<p>
-  <strong>Current health point:</strong>
-  <%= @pokemon.current_health_point %>
-</p>
-
-<p>
-  <strong>Attack:</strong>
-  <%= @pokemon.attack %>
-</p>
-
-<p>
-  <strong>Defence:</strong>
-  <%= @pokemon.defence %>
-</p>
-
-<p>
-  <strong>Speed:</strong>
-  <%= @pokemon.speed %>
-</p>
-
-<p>
-  <strong>Current experience:</strong>
-  <%= @pokemon.current_experience %>
-</p>
-
-<%= link_to 'Edit', edit_pokemon_path(@pokemon) %> |
-<%= link_to 'Back', pokemons_path %>
+ <!-- Page Header -->
+<header class="masthead">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="site-heading">
+          <h1>Pokemon</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<hr>
+<div class="container">
+  <% if notice.present? %>
+    <p id="notice" class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <div>
+    <%= link_to 'Destroy', @pokemon, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+    <%= link_to 'Edit', edit_pokemon_path(@pokemon), :class=>"btn btn-primary" %> |
+    <%= link_to 'Back', pokemons_path, :class=>"btn btn-secondary" %>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-md-4">
+      <p>
+        <%= image_tag(@pokedex.image_url) %>
+      </p>
+    </div>
+    <div class="col-md-8">
+      <p>
+        <strong>Pokedex:</strong>
+        <%= @pokedex.name%>
+      </p>
+      <p>
+        <strong>Name:</strong>
+        <%= @pokemon.name %>
+      </p>
+      <p>
+        <strong>Level:</strong>
+        <%= @pokemon.level %>
+      </p>
+      <p>
+        <strong>Max health point:</strong>
+        <%= @pokemon.max_health_point %>
+      </p>
+      <p>
+        <strong>Current health point:</strong>
+        <%= @pokemon.current_health_point %>
+      </p>
+      <p>
+        <strong>Attack:</strong>
+        <%= @pokemon.attack %>
+      </p>
+      <p>
+        <strong>Defence:</strong>
+        <%= @pokemon.defence %>
+      </p>
+      <p>
+        <strong>Speed:</strong>
+        <%= @pokemon.speed %>
+      </p>
+      <p>
+        <strong>Current experience:</strong>
+        <%= @pokemon.current_experience %>
+      </p>
+    </div>
+  </div>
+</div>

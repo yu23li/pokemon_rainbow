@@ -1,0 +1,52 @@
+<%= form_with(model: pokemon, local: true) do |form| %>
+  <% if pokemon.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(pokemon.errors.count, "error") %> prohibited this pokemon from being saved:
+      </h2>
+      <ul>
+        <% pokemon.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group col-md-9">
+    <%= form.label :name %>
+    <%= form.text_field :name, :class=>"form-control" %>
+  </div>
+  <div class="form-group col-md-9">
+    <%= form.label :level %>
+    <%= form.number_field :level, disabled: true, :class=>"form-control" %>
+  </div>
+  <div class="form-group col-md-9">
+    <%= form.label :max_health_point %>
+    <%= form.number_field :max_health_point, :class=>"form-control" %>
+  </div>
+  <div class="form-group col-md-9">
+    <%= form.label :attack %>
+    <%= form.number_field :attack, :class=>"form-control" %>
+  </div>
+  <div class="form-group col-md-9">
+    <%= form.label :defence %>
+    <%= form.number_field :defence, :class=>"form-control" %>
+  </div>
+  <div class="form-group col-md-9">
+    <%= form.label :current_health_point %>
+    <%= form.number_field :current_health_point, :class=>"form-control" %>
+  </div>
+  <div class="form-group col-md-9">
+    <%= form.label :speed %>
+    <%= form.number_field :speed, :class=>"form-control" %>
+  </div>
+  <div class="form-group col-md-9">
+    <%= form.label :current_experience %>
+    <%= form.number_field :current_experience, disabled: true, :class=>"form-control" %>
+  </div>
+  <div class="form-group col-md-9">
+    <%= form.label :pokedex_id %>
+    <%= select_tag 'pokemon[pokedex_id]', options_for_select(@pokedex_select, :selected => pokemon.pokedex_id), :class=>"form-control", disabled: true %>
+  </div>
+  <div class="form-group col-md-9">
+    <%= form.submit :class=>"btn btn-primary" %>
+  </div>
+<% end %>

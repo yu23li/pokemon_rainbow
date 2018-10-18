@@ -1,72 +1,56 @@
     <!-- Page Header -->
-    <header class="masthead">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="site-heading">
-              <h1>Pokedex</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <hr>
-
-
-<div class="container">
-
-
-      <% if notice.present? %>
-       <p id="notice" class="alert alert-success"><%= notice %></p>
-      <% end %>
-
-      <div class="row">
-
-          <div class="col-md-4">
-            <p>
-              <%= image_tag(@pokedex.image_url) %>
-            </p>
-          </div>
-
-          <div class="col-md-8">
-            <p>
-              <strong>Name:</strong>
-              <%= @pokedex.name %>
-            </p>
-
-            <p>
-              <strong>Base health point:</strong>
-              <%= @pokedex.base_health_point %>
-            </p>
-
-            <p>
-              <strong>Base attack:</strong>
-              <%= @pokedex.base_attack %>
-            </p>
-
-            <p>
-              <strong>Base defence:</strong>
-              <%= @pokedex.base_defence %>
-            </p>
-
-            <p>
-              <strong>Base speed:</strong>
-              <%= @pokedex.base_speed %>
-            </p>
-
-            <p>
-              <strong>Element type:</strong>
-              <%= @pokedex.element_type %>
-            </p>
-        </div>
-
-        <div class="col-md-4">
-
-          <%= link_to 'Edit', edit_pokedex_path(@pokedex), :class=>"btn btn-primary" %> |
-          <%= link_to 'Back', pokedexes_path, :class=>"btn btn-secondary" %>
-
+<header class="masthead">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="site-heading">
+          <h1>Pokedex</h1>
         </div>
       </div>
     </div>
-
+  </div>
+</header>
+<hr>
+<div class="container">
+  <% if notice.present? %>
+    <p id="notice" class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <div class="row">
+    <div class="col-md-4">
+      <p>
+        <%= image_tag(@pokedex.image_url) %>
+      </p>
+    </div>
+    <div class="col-md-8">
+      <p>
+        <strong>Name:</strong>
+        <%= @pokedex.name %>
+      </p>
+      <p>
+        <strong>Base health point:</strong>
+        <%= @pokedex.base_health_point %>
+      </p>
+      <p>
+        <strong>Base attack:</strong>
+        <%= @pokedex.base_attack %>
+      </p>
+      <p>
+        <strong>Base defence:</strong>
+        <%= @pokedex.base_defence %>
+      </p>
+      <p>
+        <strong>Base speed:</strong>
+        <%= @pokedex.base_speed %>
+      </p>
+      <p>
+        <strong>Element type:</strong>
+        <%= @pokedex.element_type %>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <%= link_to 'Edit', edit_pokedex_path(@pokedex), :class=>"btn btn-primary" %> |
+      <%= link_to 'Back', pokedexes_path, :class=>"btn btn-secondary" %>
+    </div>
+  </div>
+</div>

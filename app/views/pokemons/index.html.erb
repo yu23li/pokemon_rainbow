@@ -1,43 +1,60 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Pokemons</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Pokedex</th>
-      <th>Name</th>
-      <th>Level</th>
-      <th>Max health point</th>
-      <th>Current health point</th>
-      <th>Attack</th>
-      <th>Defence</th>
-      <th>Speed</th>
-      <th>Current experience</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @pokemons.each do |pokemon| %>
-      <tr>
-        <td><%= pokemon.pokedex_id %></td>
-        <td><%= pokemon.name %></td>
-        <td><%= pokemon.level %></td>
-        <td><%= pokemon.max_health_point %></td>
-        <td><%= pokemon.current_health_point %></td>
-        <td><%= pokemon.attack %></td>
-        <td><%= pokemon.defence %></td>
-        <td><%= pokemon.speed %></td>
-        <td><%= pokemon.current_experience %></td>
-        <td><%= link_to 'Show', pokemon %></td>
-        <td><%= link_to 'Edit', edit_pokemon_path(pokemon) %></td>
-        <td><%= link_to 'Destroy', pokemon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Pokemon', new_pokemon_path %>
+<!-- - Page Header -->
+<header class="masthead">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4x">
+        <div class="site-heading">
+          <h1>Pokemons</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<hr>
+<div class="container">
+  <% if notice.present? %>
+    <p id="notice" class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <div class="row col-md-4x">
+    <%= link_to 'New Pokemon', new_pokemon_path, :class=>"btn btn-primary float-left mb-2" %>
+    <hr>
+    <table class="table table-striped" border="1"">
+      <thead class="thead-dark">
+        <tr>
+          <th>Pokedex</th>
+          <th>Name</th>
+          <th>Level</th>
+          <th>Max health point</th>
+          <th>Current health point</th>
+          <th>Attack</th>
+          <th>Defence</th>
+          <th>Speed</th>
+          <th>Current experience</th>
+          <th colspan="3" class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pokemons.each do |pokemon| %>
+          <tr>
+            <td><%= pokemon.pokedex.name %></td>
+            <td><%= pokemon.name %></td>
+            <td><%= pokemon.level %></td>
+            <td><%= pokemon.max_health_point %></td>
+            <td><%= pokemon.current_health_point %></td>
+            <td><%= pokemon.attack %></td>
+            <td><%= pokemon.defence %></td>
+            <td><%= pokemon.speed %></td>
+            <td><%= pokemon.current_experience %></td>
+            <td><%= link_to 'Show', pokemon, :class => "btn btn-primary" %></td>
+            <td><%= link_to 'Edit', edit_pokemon_path(pokemon), :class => "btn btn-warning" %></td>
+            <td><%= link_to 'Destroy', pokemon, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="digg_pagination float-right">
+      <%= will_paginate @pokemons %>
+    </div>
+  </div>
+</div>
