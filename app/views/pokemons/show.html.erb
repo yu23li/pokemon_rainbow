@@ -69,3 +69,39 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="row col-md-4x">
+    <hr>
+    <table class="table table-striped" border="1"">
+      <thead class="thead-dark">
+        <tr>
+          <th>Name Attack</th>
+          <th>Power</th>
+          <th>Max pp</th>
+          <th>Element type</th>
+          <th>Current PP</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pokemon_skills.each do |ps| %>
+          <tr>
+            <td><%= ps.skill.name %></td>
+            <td><%= ps.skill.power %></td>
+            <td><%= ps.skill.max_pp %></td>
+            <td><%= ps.skill.element_type %></td>
+            <td><%= ps.current_pp%></td>
+            <td><%= link_to 'Destroy', ps, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+    <div>
+    <%= render 'pokemon_skills/form', pokemon_skill: @pokemon_skill, pokemon: @pokemon%>
+    </div>
+    <div>
+    </div>
+  </div>
+</div>

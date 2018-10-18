@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_17_075818) do
+ActiveRecord::Schema.define(version: 2018_10_18_032851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 2018_10_17_075818) do
     t.integer "base_speed"
     t.string "element_type", limit: 225
     t.string "image_url", limit: 225
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pokemon_skills", force: :cascade do |t|
+    t.integer "skill_id"
+    t.integer "pokemon_id"
+    t.integer "current_pp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
