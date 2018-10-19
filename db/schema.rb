@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_032851) do
+ActiveRecord::Schema.define(version: 2018_10_19_085709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 2018_10_18_032851) do
     t.integer "base_speed"
     t.string "element_type", limit: 225
     t.string "image_url", limit: 225
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pokemon_battles", force: :cascade do |t|
+    t.integer "pokemon1_id"
+    t.integer "pokemon2_id"
+    t.integer "current_turn"
+    t.string "state"
+    t.integer "pokemon_winner_id"
+    t.integer "pokemon_loser_id"
+    t.integer "experience_gain"
+    t.integer "pokemon1_max_health_point"
+    t.integer "pokemon2_max_health_point"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
