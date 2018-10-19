@@ -1,4 +1,14 @@
 <%= form_with(model: pokemon_skill, local: true) do |form| %>
+  <% if pokemon_skill.errors.any? %>
+    <div id="error_explanation"  class="alert alert-danger">
+      <h2><%= pluralize(pokemon_skill.errors.count, "error") %> prohibited this pokemon_skill from being saved:</h2>
+      <ul>
+        <% pokemon_skill.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="form-group col-md-12">
     <%= form.label :skill_id %>
     <%= select_tag 'pokemon_skill[skill_id]', options_for_select(@skill_select), :class=>"form-control" %>

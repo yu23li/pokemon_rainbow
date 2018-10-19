@@ -26,15 +26,10 @@ class PokedexesController < ApplicationController
   # POST /pokedexes.json
   def create
     @pokedex = Pokedex.new(pokedex_params)
-
-    respond_to do |format|
-      if @pokedex.save
-        format.html { redirect_to @pokedex, notice: 'Pokedex was successfully created.' }
-        format.json { render :show, status: :created, location: @pokedex }
-      else
-        format.html { render :new }
-        format.json { render json: @pokedex.errors, status: :unprocessable_entity }
-      end
+    if @pokedex.save
+      redirect_to @pokedex, notice: 'Pokedex was successfully created.'
+    else
+      render :new
     end
   end
 

@@ -12,7 +12,7 @@ class PokemonsController < ApplicationController
   # GET /pokemons/1.json
   def show
     @pokedex = Pokedex.find(@pokemon.pokedex_id)
-    @skill_select = Skill.all.collect{ |u| [u.name, u.id] }
+    @skill_select = Skill.where(element_type: @pokedex.element_type).collect{ |u| [u.name, u.id] }
     @pokemon_skill = PokemonSkill.new
     @pokemon_skills = PokemonSkill.where(pokemon_id: @pokemon.id)
   end

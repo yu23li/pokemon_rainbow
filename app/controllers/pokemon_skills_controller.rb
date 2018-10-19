@@ -6,20 +6,17 @@ class PokemonSkillsController < ApplicationController
     skill = Skill.find(@pokemon_skill.skill_id)
 
     @pokemon_skill.current_pp = skill.max_pp
-
-    respond_to do |format|
-      @pokemon_skill.save
-        format.html { redirect_to pokemon_url(@pokemon_skill.pokemon_id), notice: 'Pokemon was successfully created.' }
-        format.json { render :show, status: :created, location: @pokemon }
+    if @pokemon_skill.save
+      redirect_to pokemon_url(@pokemon_skill.pokemon_id), notice: 'Pokemon was successfully created.'
+    else
+      redirect_to pokemon_url(@pokemon_skill.pokemon_id), notice: @pokemon_skill.errors.full_messages.join('<br>')
     end
   end
 
   def destroy
-   @pokemon_skill.destroy
-   respond_to do |format|
-     format.html { redirect_to pokemon_url(@pokemon_skill.pokemon_id), notice: 'Pokemon Skill was successfully destroyed.' }
-     format.json { head :no_content }
-   end
+   if @pokemon_skill.destroy
+      redirect_to pokemon_url(@pokemon_skill.pokemon_id), notice: 'Pokemon Skill was successfully destroyed.'
+    end
   end
 
   def pokemon_skill_params
