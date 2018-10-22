@@ -36,24 +36,18 @@ class PokedexesController < ApplicationController
   # PATCH/PUT /pokedexes/1
   # PATCH/PUT /pokedexes/1.json
   def update
-    respond_to do |format|
-      if @pokedex.update(pokedex_params)
-        format.html { redirect_to @pokedex, notice: 'Pokedex was successfully updated.' }
-        format.json { render :show, status: :ok, location: @pokedex }
-      else
-        format.html { render :edit }
-        format.json { render json: @pokedex.errors, status: :unprocessable_entity }
-      end
-    end
+     if @pokedex.update(pokedex_params)
+       redirect_to @pokedex, notice: 'Pokedex was successfully updated.'
+     else
+       render :edit
+     end
   end
 
   # DELETE /pokedexes/1
   # DELETE /pokedexes/1.json
   def destroy
-    @pokedex.destroy
-    respond_to do |format|
-      format.html { redirect_to pokedexes_url, notice: 'Pokedex was successfully destroyed.' }
-      format.json { head :no_content }
+    if @pokedex.destroy
+      redirect_to pokedexes_url, notice: 'Pokedex was successfully destroyed.'
     end
   end
 

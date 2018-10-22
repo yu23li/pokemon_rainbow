@@ -16,20 +16,21 @@ ActiveRecord::Schema.define(version: 2018_10_19_085709) do
   enable_extension "plpgsql"
 
   create_table "pokedexes", force: :cascade do |t|
-    t.string "name", limit: 45
-    t.integer "base_health_point"
-    t.integer "base_attack"
-    t.integer "base_defence"
-    t.integer "base_speed"
+    t.string "name", limit: 45, null: false
+    t.integer "base_health_point", null: false
+    t.integer "base_attack", null: false
+    t.integer "base_defence", null: false
+    t.integer "base_speed", null: false
     t.string "element_type", limit: 225
-    t.string "image_url", limit: 225
+    t.string "image_url", limit: 225, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_pokedexes_on_name", unique: true
   end
 
   create_table "pokemon_battles", force: :cascade do |t|
-    t.integer "pokemon1_id"
-    t.integer "pokemon2_id"
+    t.integer "pokemon1_id", null: false
+    t.integer "pokemon2_id", null: false
     t.integer "current_turn"
     t.string "state"
     t.integer "pokemon_winner_id"
@@ -51,7 +52,7 @@ ActiveRecord::Schema.define(version: 2018_10_19_085709) do
 
   create_table "pokemons", force: :cascade do |t|
     t.integer "pokedex_id"
-    t.string "name", limit: 45
+    t.string "name", limit: 45, null: false
     t.integer "level"
     t.integer "max_health_point"
     t.integer "current_health_point"
@@ -61,15 +62,23 @@ ActiveRecord::Schema.define(version: 2018_10_19_085709) do
     t.integer "current_experience"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_pokemons_on_name", unique: true
   end
 
   create_table "skills", force: :cascade do |t|
-    t.string "name", limit: 45
-    t.integer "power"
+    t.string "name", limit: 45, null: false
+    t.integer "power", null: false
     t.integer "max_pp"
     t.string "element_type", limit: 45
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "pokemon_battles", "pokemons", column: "pokemon1_id"
+  add_foreign_key "pokemon_battles", "pokemons", column: "pokemon2_id"
+  add_foreign_key "pokemon_battles", "pokemons", column: "pokemon_loser_id"
+  add_foreign_key "pokemon_battles", "pokemons", column: "pokemon_winner_id"
+  add_foreign_key "pokemon_skills", "pokemons"
+  add_foreign_key "pokemon_skills", "skills"
+  add_foreign_key "pokemons", "pokedexes"
 end

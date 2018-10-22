@@ -7,5 +7,7 @@ class CreatePokemonSkills < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    add_foreign_key :pokemon_skills, :skills
+    add_foreign_key :pokemon_skills, :pokemons
   end
 end

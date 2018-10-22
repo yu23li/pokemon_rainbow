@@ -1,0 +1,59 @@
+    <!-- Page Header -->
+<header class="masthead">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="site-heading">
+          <h1>Pokemon Battle</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<hr>
+<div class="container">
+  <% if notice.present? %>
+    <p id="notice" class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col">
+        <%= image_tag(@pokemon1.pokedex.image_url) %>
+        <p>
+          <strong>Name:</strong>
+          <%= @pokemon1.name %>
+        </p>
+        <p>
+          <strong>Hp:</strong>
+          <%= @pokemon1.current_health_point %> / <%= @pokemon1.max_health_point%>
+        </p>
+        <p>
+          <strong>Attack:</strong>
+          <%= select_tag '', options_for_select(@skill_select1), :class=>"form-control" %>
+        </p>
+        <%= link_to 'Attack', "#",  :class => "btn btn-primary" %></td>
+        <%= link_to 'Surrender', "#",  :class => "btn btn-primary" %></td>
+      </div>
+      <div class="col">
+        <h1 class="text-center">VS</h1>
+      </div>
+      <div class="col">
+        <%= image_tag(@pokemon2.pokedex.image_url) %>
+        <p>
+          <strong>Name:</strong>
+          <%= @pokemon2.name %>
+        </p>
+        <p>
+          <strong>Hp:</strong>
+          <%= @pokemon2.current_health_point %> / <%= @pokemon2.max_health_point%>
+        </p>
+        <p>
+          <strong>Attack:</strong>
+          <%= select_tag '', options_for_select(@skill_select2), :class=>"form-control" %>
+        </p>
+        <%= link_to 'Attack', "#", :class => "btn btn-primary" %></td>
+        <%= link_to 'Surrender', "#", :class => "btn btn-primary" %></td>
+      </div>
+    </div>
+  </div>

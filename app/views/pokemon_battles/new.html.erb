@@ -1,0 +1,18 @@
+
+<header class="masthead">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4x">
+        <div class="site-heading">
+          <h1>Select Pokemon</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<hr>
+<div class="container">
+  <%= render 'form', pokemon_battle: @pokemon_battle %>
+  <%= link_to 'Back', pokemon_battles_path, :class=>"btn btn-secondary"%>
+</div>

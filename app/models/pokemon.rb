@@ -2,6 +2,7 @@ class Pokemon < ApplicationRecord
   belongs_to :pokedex
   has_many :pokemon_skills
   has_many :skills, through: :pokemon_skills
+  has_many :pokemon_battles
 
   with_options unless: :new_record? do |new|
     new.validates :current_health_point, numericality: { less_than: :max_health_point, greater_than_or_equal_to: 0 }

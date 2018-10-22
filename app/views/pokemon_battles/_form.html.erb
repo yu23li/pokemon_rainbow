@@ -1,8 +1,30 @@
-  <div class="form-group col-md-12">
-    <%= form.label :pokomen_id %>
-    <%= select_tag '', options_for_select(@pokemon_select), :class=>"form-control" %>
+<%= form_with(model: pokemon_battle, local: true) do |form| %>
+  <% if pokemon_battle.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(pokemon_battle.errors.count, "error") %> prohibited this pokemon_battle from being saved:</h2>
+      <ul>
+        <% pokemon_battle.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="container">
+  <div class="row">
+    <div class="col-sm">
+    <%= form.label :pokemon1_id %>
+    <%= select_tag 'pokemon_battle[pokemon1_id]', options_for_select(@pokemon_select), :class=>"form-control" %>
+    </div>
+    <div class="col-sm center-block">
+    <h1 class="text-center">VS</h1>
+    <br>
+    <br>
+    <%= form.submit :class=>"btn btn-primary center-block" %>
+    </div>
+    <div class="col-sm">
+    <%= form.label :pokemon2_id %>
+    <%= select_tag 'pokemon_battle[pokemon2_id]', options_for_select(@pokemon_select), :class=>"form-control" %>
+    </div>
   </div>
-  <div class="form-group col-md-9">
-    <%= form.submit :class=>"btn btn-primary" %>
-  </div>
-<% end %>
+</div>
+<% end%>

@@ -1,8 +1,8 @@
 class CreatePokemonBattles < ActiveRecord::Migration[5.2]
   def change
     create_table :pokemon_battles do |t|
-      t.integer :pokemon1_id
-      t.integer :pokemon2_id
+      t.integer :pokemon1_id, :null => false
+      t.integer :pokemon2_id, :null => false
       t.integer :current_turn
       t.string :state
       t.integer :pokemon_winner_id
@@ -13,5 +13,9 @@ class CreatePokemonBattles < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon1_id, primary_key: :id
+    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon2_id, primary_key: :id
+    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon_winner_id, primary_key: :id
+    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon_loser_id, primary_key: :id
   end
 end
