@@ -44,6 +44,20 @@ class PokemonBattlesController < ApplicationController
     end
   end
 
+  def attack
+    #@pokemon = params[:commit]
+    pokemon1 = Pokemon.find(@pokemon_battle.pokemon1_id)
+    pokemon2 = Pokemon.find(@pokemon_battle.pokemon2_id)
+    current_turn = @pokemon_battle.current_turn
+
+    if current_turn % 2 == 0
+      PokemonBattleCalculator.calculate_damage(pokemon2, pokemon1, skill_id)
+    else
+      PokemonBattleCalculator.calculate_damage(pokemon1, pokemon2, skill_id)
+    end
+
+  end
+
   private
 
   def set_pokemon_battle
