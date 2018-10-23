@@ -2,8 +2,8 @@ class PokemonBattle < ApplicationRecord
 
   belongs_to :pokemon1, class_name: "Pokemon"
   belongs_to :pokemon2, class_name: "Pokemon"
-  belongs_to :pokemon_winner, class_name: "Pokemon"
-  belongs_to :pokemon_loser, class_name: "Pokemon"
+  belongs_to :pokemon_winner, class_name: "Pokemon", optional: true
+  belongs_to :pokemon_loser, class_name: "Pokemon", optional: true
 
   validate :not_attack_himself
   validate :still_ongoing

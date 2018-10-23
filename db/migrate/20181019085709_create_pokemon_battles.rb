@@ -13,9 +13,9 @@ class CreatePokemonBattles < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon1_id, primary_key: :id
-    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon2_id, primary_key: :id
-    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon_winner_id, primary_key: :id
-    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon_loser_id, primary_key: :id
+    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon1_id
+    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon2_id
+    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon_winner_id
+    add_foreign_key :pokemon_battles, :pokemons, column: :pokemon_loser_id
   end
 end

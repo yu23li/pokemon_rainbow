@@ -40,7 +40,7 @@ class SkillsController < ApplicationController
       if @skill.update(skill_params)
         redirect_to @skill, notice: 'Skill was successfully updated.'
       else
-        render :edit }
+        render :edit
       end
   end
 
