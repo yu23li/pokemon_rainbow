@@ -1,17 +1,16 @@
 class PokemonBattlesController < ApplicationController
-  before_action :set_pokemon_battle, only: [:show, :edit, :update, :destroy]
+  before_action :set_pokemon_battle, only: [:show, :edit, :update, :destroy, :attack]
 
   def index
     @pokemon_battle = PokemonBattle.all.paginate(:page => params[:page], :per_page => 5)
-
   end
 
   def show
     @pokemon1 = Pokemon.find(@pokemon_battle.pokemon1_id)
     @pokemon2 = Pokemon.find(@pokemon_battle.pokemon2_id)
 
-    @skill_select1 = @pokemon1.pokemon_skills.collect{ |u| ["#{u.skill.name}(#{u.current_pp}/#{u.skill.max_pp})", u.id] }
-    @skill_select2 = @pokemon2.pokemon_skills.collect{ |u| ["#{u.skill.name}(#{u.current_pp}/#{u.skill.max_pp})", u.id] }
+    @skill_select1 = @pokemon1.pokemon_skills.collect{ |u| ["#{u.skill.name}(#{u.current_pp}/#{u.skill.max_pp})", u.skill.id] }
+    @skill_select2 = @pokemon2.pokemon_skills.collect{ |u| ["#{u.skill.name}(#{u.current_pp}/#{u.skill.max_pp})", u.skill.id] }
   end
 
   def new
@@ -45,17 +44,66 @@ class PokemonBattlesController < ApplicationController
   end
 
   def attack
-    #@pokemon = params[:commit]
     pokemon1 = Pokemon.find(@pokemon_battle.pokemon1_id)
     pokemon2 = Pokemon.find(@pokemon_battle.pokemon2_id)
+    skill_id = params[:skill_id]
     current_turn = @pokemon_battle.current_turn
 
     if current_turn % 2 == 0
-      PokemonBattleCalculator.calculate_damage(pokemon2, pokemon1, skill_id)
-    else
-      PokemonBattleCalculator.calculate_damage(pokemon1, pokemon2, skill_id)
-    end
 
+      pokemon_skill = PokemonSkill.where("skill_id = ? AND pokemon_id = ?", skill_id, pokemon2).first
+      damage = PokemonBattleCalculator.calculate_damage(pokemon2, pokemon1, skill_id)
+      current_hp = pokemon1.current_health_point - damage
+      pokemon_current_hp = current_hp < 0 ? 0 : current_pp
+      current_pp = pokemon_skill.current_pp - 1
+      current_turn = @pokemon_battle.current_turn + 1
+
+      if pokemon_skill.current_pp == 0
+          flash[:error] = "Pokemon 2 sudah tidak punya kekuatan!"
+          redirect_to @pokemon_battle
+      else
+        if pokemon_current_hp == 0
+         @pokemon_battle.update(pokemon_winner_id: pokemon2.id)
+         @pokemon_battle.update(pokemon_loser_id: pokemon1.id)
+         @pokemon_battle.update(state: "finish")
+
+          flash[:success] = "Pokemon 2 Menang"
+        end
+        pokemon1.update(current_health_point: pokemon_current_hp)
+        pokemon_skill.update(current_pp: current_pp)
+        @pokemon_battle.update(current_turn: current_turn)
+
+        redirect_to @pokemon_battle, notice: "GOOD JOB POKEMON 2"
+      end
+
+    else
+      pokemon_skill = PokemonSkill.where("skill_id = ? AND pokemon_id = ?", skill_id, pokemon1).first
+      damage = PokemonBattleCalculator.calculate_damage(pokemon1, pokemon2, skill_id)
+      current_hp = pokemon2.current_health_point - damage
+      pokemon_current_hp = current_hp < 0 ? 0 : current_pp
+      current_pp = pokemon_skill.current_pp - 1
+      current_turn = @pokemon_battle.current_turn + 1
+
+      if pokemon_skill.current_pp == 0
+        flash[:error] = "Pokemon 1 sudah tidak punya kekuatan!"
+        redirect_to @pokemon_battle
+      else
+
+       if pokemon_current_hp == 0
+         @pokemon_battle.update(pokemon_winner_id: pokemon1.id)
+         @pokemon_battle.update(pokemon_loser_id: pokemon2.id)
+         @pokemon_battle.update(state: "finish")
+
+         flash[:success] = "Pokemon 1 Menang"
+       end
+        pokemon2.update(current_health_point: pokemon_current_hp)
+        pokemon_skill.update(current_pp: current_pp)
+        @pokemon_battle.update(current_turn: current_turn)
+
+        flash[:success] = "GOOD JOB POKEMON 1"
+        redirect_to @pokemon_battle
+      end
+    end
   end
 
   private

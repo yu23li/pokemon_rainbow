@@ -15,4 +15,5 @@ class Pokemon < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :current_experience, numericality: { greater_than_or_equal_to: 0 }
   validates :level, numericality: { greater_than: 0 }
+
 end

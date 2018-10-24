@@ -12,52 +12,68 @@
   </div>
 </header>
 <hr>
+
 <div class="container">
-  <% if notice.present? %>
-    <p id="notice" class="alert alert-success"><%= notice %></p>
-  <% end %>
-  <div class="container">
+    <% flash.each do |key, value| %>
+      <% if key == "error"%>
+        <div class="alert alert-danger alert-<%= key %>"><%= value %></div>
+      <% else %>
+        <div class="alert alert-success alert-<%= key %>"><%= value %></div>
+      <% end %>
+    <% end %>
     <div class="row align-items-start">
-      <%= form_tag(attack_pokemon_battle_path) do %>
-        <div class="col">
+      <div class="col-md-5 d-flex justify-content-center">
+        <%= form_tag(attack_pokemon_battle_path) do %>
+        <div class="img img_container" display="inline">
           <%= image_tag(@pokemon1.pokedex.image_url) %>
-          <p>
+        </div>
+          <div class="form-group col-md-9">
             <strong>Name:</strong>
             <%= @pokemon1.name %>
-          </p>
-          <p>
+          </div>
+          <div class="form-group col-md-9">
             <strong>Hp:</strong>
             <%= @pokemon1.current_health_point %> / <%= @pokemon1.max_health_point%>
-          </p>
-          <p>
-            <strong>Attack:</strong>
-            <%= select_tag 'skill', options_for_select(@skill_select1), :class=>"form-control" %>
-          </p>
-          <%= submit_tag 'Attack', :class => "btn btn-primary" %>
+          </div>
+          <div class="form-group col-md-9">
+            <%= select_tag 'skill_id', options_for_select(@skill_select1), :class=>"form-control" %>
+          </div>
+          <% if @pokemon_battle.current_turn % 2 == 0%>
+            <%= submit_tag 'Attack', :class => "btn btn-primary", :style => "display: none" %>
+          <%else%>
+            <%= submit_tag 'Attack', :class => "btn btn-primary"%>
+          <%end%>
           <%= link_to 'Surrender', "#",  :class => "btn btn-primary" %>
-        </div>
-      <% end %>
-      <%= form_tag(attack_pokemon_battle_path) do %>
-        <div class="col">
-          <h1 class="text-center">VS</h1>
-        </div>
-        <div class="col">
+        <% end %>
+      </div>
+      <div class="row col-md-2 d-flex justify-content-center">
+        <h1 class="text-center">VS</h1>
+        <h1 class="text-center">Turn: <%= @pokemon_battle.current_turn %></h1>
+        <h1 class="text-center"><%= @pokemon_battle.state.upcase %></h1>
+      </div>
+      <div class="col-md-5 d-flex justify-content-center">
+        <%= form_tag(attack_pokemon_battle_path) do %>
+        <div class="img img_container">
           <%= image_tag(@pokemon2.pokedex.image_url) %>
-          <p>
+        </div>
+          <div class="form-group col-md-9">
             <strong>Name:</strong>
             <%= @pokemon2.name %>
-          </p>
-          <p>
+          </div>
+          <div class="form-group col-md-9">
             <strong>Hp:</strong>
             <%= @pokemon2.current_health_point %> / <%= @pokemon2.max_health_point%>
-          </p>
-          <p>
-            <strong>Attack:</strong>
-            <%= select_tag 'skill', options_for_select(@skill_select2), :class=>"form-control" %>
-          </p>
-          <%= submit_tag 'Attack', :class => "btn btn-primary" %>
-          <%= link_to 'Surrender', "#", :class => "btn btn-primary" %>
-        </div>
-      <% end %>
+          </div>
+          <div class="form-group col-md-9">
+            <%= select_tag 'skill_id', options_for_select(@skill_select2), :class=>"form-control" %>
+          </div>
+          <% if @pokemon_battle.current_turn % 2 != 0%>
+            <%= submit_tag 'Attack', :class => "btn btn-primary", :style => "display: none" %>
+          <%else%>
+            <%= submit_tag 'Attack', :class => "btn btn-primary"%>
+          <%end%>
+          <%= link_to 'Surrender', "#",  :class => "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
-  </div>
+</div>

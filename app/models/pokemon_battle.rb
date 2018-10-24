@@ -5,9 +5,11 @@ class PokemonBattle < ApplicationRecord
   belongs_to :pokemon_winner, class_name: "Pokemon", optional: true
   belongs_to :pokemon_loser, class_name: "Pokemon", optional: true
 
-  validate :not_attack_himself
-  validate :still_ongoing
-  validate :current_hp_must_greater_than_0
+  with_options if: :new_record? do |new|
+    new.validate :not_attack_himself
+    new.validate :still_ongoing
+    new.validate :current_hp_must_greater_than_0
+  end
 
   def not_attack_himself
     pokemon1 = Pokemon.find(pokemon1_id)

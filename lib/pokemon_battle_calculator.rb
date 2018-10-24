@@ -77,8 +77,8 @@ class PokemonBattleCalculator
 
     #damage
     damage = ((((2.0 * attacker_pokemon.level.to_f / 5.0 + 2.0) * attacker_pokemon.attack.to_f * skill_power.to_f / defender_pokemon.defence.to_f) /
-              50.0) + 2.0) * stab.to_f * weakness_resistance.to_f * (rand(85..100)/100).to_f
-    result = damage.to_i
+              50.0) + 2.0) * stab.to_f * weakness_resistance.to_f * (rand(85.0..100.0)/100.0).to_f
+    result = damage.round
   end
 
 end
