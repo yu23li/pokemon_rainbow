@@ -5,7 +5,7 @@ class PokemonsController < ApplicationController
   # GET /pokemons
   # GET /pokemons.json
   def index
-    @pokemons = Pokemon.all.paginate(:page => params[:page], :per_page => 5)
+    @pokemons = Pokemon.all.reorder("created_at DESC").paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /pokemons/1

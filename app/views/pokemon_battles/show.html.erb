@@ -38,12 +38,15 @@
           <div class="form-group col-md-9">
             <%= select_tag 'skill_id', options_for_select(@skill_select1), :class=>"form-control" %>
           </div>
-          <% if @pokemon_battle.current_turn % 2 == 0%>
-            <%= submit_tag 'Attack', :class => "btn btn-primary", :style => "display: none" %>
-          <%else%>
-            <%= submit_tag 'Attack', :class => "btn btn-primary"%>
+          <%if @pokemon_battle.state != "finish" %>
+            <% if @pokemon_battle.current_turn % 2 == 0 %>
+              <%= submit_tag 'Attack', :class => "btn btn-primary", :style => "display: none" %>
+              <%= link_to 'Surrender', surrender_pokemon_battle_path(@pokemon_battle.id),  :class => "btn btn-primary",:style => "display: none" %>
+            <%else%>
+              <%= submit_tag 'Attack', :class => "btn btn-primary"%>
+              <%= link_to 'Surrender', surrender_pokemon_battle_path(@pokemon_battle.id),  :class => "btn btn-primary" %>
+            <%end%>
           <%end%>
-          <%= link_to 'Surrender', "#",  :class => "btn btn-primary" %>
         <% end %>
       </div>
       <div class="row col-md-2 d-flex justify-content-center">
@@ -67,13 +70,19 @@
           <div class="form-group col-md-9">
             <%= select_tag 'skill_id', options_for_select(@skill_select2), :class=>"form-control" %>
           </div>
-          <% if @pokemon_battle.current_turn % 2 != 0%>
-            <%= submit_tag 'Attack', :class => "btn btn-primary", :style => "display: none" %>
-          <%else%>
-            <%= submit_tag 'Attack', :class => "btn btn-primary"%>
-          <%end%>
-          <%= link_to 'Surrender', "#",  :class => "btn btn-primary" %>
+          <%if @pokemon_battle.state != "finish" %>
+            <% if @pokemon_battle.current_turn % 2 != 0 %>
+              <%= submit_tag 'Attack', :class => "btn btn-primary", :style => "display: none" %>
+              <%= link_to 'Surrender', surrender_pokemon_battle_path(@pokemon_battle.id),  :class => "btn btn-primary", :style => "display: none" %>
+            <%else%>
+              <%= submit_tag 'Attack', :class => "btn btn-primary"%>
+              <%= link_to 'Surrender', surrender_pokemon_battle_path(@pokemon_battle.id),  :class => "btn btn-primary" %>
+            <%end%>
+          <% end %>
         <% end %>
       </div>
+    </div>
+    <div>
+      <%= link_to 'Back', pokemon_battles_path, :class=>"btn btn-secondary" %>
     </div>
 </div>

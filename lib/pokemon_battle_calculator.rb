@@ -81,4 +81,28 @@ class PokemonBattleCalculator
     result = damage.round
   end
 
+  def self.calculate_experience(level_pokemon_enemy)
+    experience_gain = rand(20..150) * level_pokemon_enemy
+  end
+
+  def self.level_up?(level_pokemon_winner, total_exprience_pokemon_winner)
+    level_limit = 2 ** level_pokemon_winner * 100
+
+    if total_exprience_pokemon_winner < level_limit
+      false
+    else
+      true
+    end
+  end
+
+  def self.calculate_level_up_extra_state
+    health_point = rand(10..20)
+    attack_point = rand(1..5)
+    defence_point = rand(1..5)
+    speed_point = rand(1..5)
+
+    bonus = Struct.new(:health_point, :attack_point, :defence_point, :speed_point)
+    bonus.new(health_point, attack_point, defence_point, speed_point)
+  end
+
 end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :pokemon_battles do
     post 'attack', on: :member
+    get 'surrender', on: :member
   end
   resources :pokemon_skills
   resources :pokemons
