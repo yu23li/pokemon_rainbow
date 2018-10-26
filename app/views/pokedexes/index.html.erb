@@ -34,12 +34,12 @@
       <tbody>
         <% @pokedexes.each do |pokedex| %>
           <tr>
-            <td><%= pokedex.name %></td>
+            <td><%= pokedex.name.capitalize  %></td>
             <td><%= pokedex.base_health_point %></td>
             <td><%= pokedex.base_attack %></td>
             <td><%= pokedex.base_defence %></td>
             <td><%= pokedex.base_speed %></td>
-            <td><%= pokedex.element_type %></td>
+            <td><%= pokedex.element_type.capitalize  %></td>
             <td><%= link_to 'Show', pokedex, :class=>"btn btn-primary float-right" %></td>
             <td><%= link_to 'Edit', edit_pokedex_path(pokedex), :class=>"btn btn-warning float-right" %></td>
             <td><%= link_to 'Destroy', pokedex, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger float-right" %></td>

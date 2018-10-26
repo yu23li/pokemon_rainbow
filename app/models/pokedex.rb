@@ -1,6 +1,6 @@
 class Pokedex < ApplicationRecord
-  ELEMENT_TYPE = ["Normal","Fire","Fighting","Water","Flying","Grass","Poison","Electric","Ground","Psychic",
-                  "Rock","Ice","Bug","Dragon","Ghost","Dark","Steel","Fairy"]
+  ELEMENT_TYPE = ["normal","fire","fighting","water","flying","grass","poison","electric","ground","psychic",
+                  "rock","ice","bug","dragon","ghost","dark","steel","fairy"]
 
   validates :name, length: { maximum: 45 }, presence: true, uniqueness: true
   validates :base_health_point, numericality: { greater_than: 0 }, presence: true

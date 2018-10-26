@@ -2,8 +2,8 @@ class Skill < ApplicationRecord
   has_many :pokemon_skills
   has_many :pokemons, through: :pokemon_skills
 
-  ELEMENT_TYPE = ["Normal","Fire","Fighting","Water","Flying","Grass","Poison","Electric","Ground","Psychic",
-                  "Rock","Ice","Bug","Dragon","Ghost","Dark","Steel","Fairy"]
+  ELEMENT_TYPE = ["normal","fire","fighting","water","flying","grass","poison","electric","ground","psychic",
+                  "rock","ice","bug","dragon","ghost","dark","steel","fairy"]
 
 
   validates :name, length: { maximum: 45 }, presence: true, uniqueness: true

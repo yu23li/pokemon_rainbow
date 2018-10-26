@@ -71,8 +71,8 @@ class PokemonBattleCalculator
     end
 
     #menghitung weakness/resistance
-    element_type_attack = attacker_pokemon.pokedex.element_type.downcase.to_sym
-    element_type_skill = skill_element_type.downcase.to_sym
+    element_type_attack = attacker_pokemon.pokedex.element_type.to_sym
+    element_type_skill = skill_element_type.to_sym
     weakness_resistance = WEAKNESS_RESISTANCE_HASH[element_type_attack][element_type_skill]
 
     #damage
