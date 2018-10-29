@@ -12,6 +12,8 @@ class PokemonBattlesController < ApplicationController
 
     @skill_select1 = @pokemon1.pokemon_skills.collect{ |u| ["#{u.skill.name}(#{u.current_pp}/#{u.skill.max_pp})", u.skill.id] }
     @skill_select2 = @pokemon2.pokemon_skills.collect{ |u| ["#{u.skill.name}(#{u.current_pp}/#{u.skill.max_pp})", u.skill.id] }
+
+    @pokemon_battle_logs = PokemonBattleLog.where(pokemon_battle_id: @pokemon_battle.id)
   end
 
   def new
@@ -61,10 +63,10 @@ class PokemonBattlesController < ApplicationController
   def surrender
     if @current_turn % 2 == 0
       attack = BattleEngine.new(pokemon_battle: @pokemon_battle, attacker: @pokemon1, defender: @pokemon2, skill_id: @skill_id)
-      attack.save!
+      attack.surrender!
     else
       attack = BattleEngine.new(pokemon_battle: @pokemon_battle, attacker: @pokemon2, defender: @pokemon1, skill_id: @skill_id)
-      attack.save!
+      attack.surrender!
     end
     attack.flash.each do |key, value|
       flash[key] = value
@@ -88,6 +90,5 @@ class PokemonBattlesController < ApplicationController
     @current_turn = @pokemon_battle.current_turn
     @skill_id = params[:skill_id]
   end
-
 
 end

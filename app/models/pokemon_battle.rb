@@ -1,5 +1,6 @@
 class PokemonBattle < ApplicationRecord
 
+  has_many :pokemon_battle_logs
   belongs_to :pokemon1, class_name: "Pokemon"
   belongs_to :pokemon2, class_name: "Pokemon"
   belongs_to :pokemon_winner, class_name: "Pokemon", optional: true

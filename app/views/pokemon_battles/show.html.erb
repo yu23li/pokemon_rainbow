@@ -86,3 +86,34 @@
       <%= link_to 'Back', pokemon_battles_path, :class=>"btn btn-secondary" %>
     </div>
 </div>
+<br>
+<div class="container">
+  <div class="row col-md-4x">
+    <hr>
+    <table class="table table-striped" border="1"">
+      <thead class="thead-dark">
+        <tr>
+          <th>Attacker</th>
+          <th>Defender</th>
+          <th>Turn</th>
+          <th>Damage</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pokemon_battle_logs.each do |pbl| %>
+          <tr>
+            <td><%= pbl.attacker.name %></td>
+            <td><%= pbl.defender.name %></td>
+            <td><%= pbl.turn %></td>
+            <td><%= pbl.damage %></td>
+            <td><%= link_to 'Destroy', pbl, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+    <div>
+    </div>
+  </div>
+</div>

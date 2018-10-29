@@ -53,7 +53,6 @@ class BattleEngine
 
     if pokemon_skill.current_pp == 0
         @flash[:error] = "#{attacker.name} sudah tidak punya kekuatan!"
-
     else
       if pokemon_current_hp == 0
          game_finish(winner:attacker, loser:defender)
@@ -62,6 +61,8 @@ class BattleEngine
       pokemon_skill.update(current_pp: current_pp)
       @pokemon_battle.update(current_turn: current_turn)
       @flash[:success] = "GOOD JOB #{attacker.name}"
+
+      battle_log(pokemon_battle: @pokemon_battle, skill_id: skill_id, attacker: attacker, defender: defender, damage: damage, action_type:"attack")
     end
   end
 
@@ -83,5 +84,25 @@ class BattleEngine
 
   def save!
     game_finish(winner: @attacker, loser: @defender)
+  end
+
+  def surrender!
+    battle_log(pokemon_battle: @pokemon_battle, skill_id: @skill_id, attacker: @attacker, defender: @defender, damage: 0, action_type:"surrender")
+    save!
+  end
+
+  def battle_log(pokemon_battle:, skill_id:, attacker:, defender:, damage:, action_type:)
+    @pokemon_battle_log = PokemonBattleLog.new
+
+    @pokemon_battle_log.pokemon_battle_id = pokemon_battle.id
+    @pokemon_battle_log.turn = @pokemon_battle.current_turn
+    @pokemon_battle_log.skill_id = skill_id
+    @pokemon_battle_log.damage = damage
+    @pokemon_battle_log.attacker_id = attacker.id
+    @pokemon_battle_log.attacker_current_health_point = attacker.current_health_point
+    @pokemon_battle_log.defender_id = defender.id
+    @pokemon_battle_log.defender_current_health_point = defender.current_health_point
+    @pokemon_battle_log.action_type = action_type
+    @pokemon_battle_log.save
   end
 end
